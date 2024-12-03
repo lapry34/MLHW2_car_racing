@@ -158,7 +158,7 @@ if __name__ == "__main__":
     optimizer = tf.keras.optimizers.Adam()
 
     # Train the VAE
-    epochs = 500
+    epochs = 20
     train_vae(vae, dataset, optimizer, epochs)
 
     # Save models
