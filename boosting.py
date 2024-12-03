@@ -1,4 +1,5 @@
 import os
+import sys
 import random
 import shutil
 
@@ -64,3 +65,6 @@ if __name__ == "__main__":
         class_dir = os.path.join(output_dir, str(class_label))
         num_files = count_files(class_dir)
         print(f"Class {class_label}: {num_files} files")
+    
+    print("Boosting completed successfully.")
+    sys.exit(0)

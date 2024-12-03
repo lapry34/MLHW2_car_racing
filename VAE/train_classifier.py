@@ -6,7 +6,7 @@ import numpy as np
 import os
 import sys
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
-from train_VAE import Encoder
+from train_VAE import Encoder, reparameterize
 
 boosting = True
 # Parameters
@@ -16,6 +16,7 @@ batch_size = 64
 num_classes = 5  # Number of classes in the dataset
 
 train_path = "../dataset/train"
+test_path = "../dataset/test"
 
 if boosting:
     train_path = "../dataset/train_boosted"
@@ -36,8 +37,17 @@ def load_images_and_labels(base_path, folders=[0, 1, 2, 3, 4]):
 
 # Feature Extraction with Encoder
 def extract_features(encoder, images):
-    z_mean, _ = encoder(images)  # Use the encoder to extract latent features
-    return z_mean.numpy()
+    z_mean_list, z_log_var_list = encoder(images)  # Use the encoder to extract latent features
+    z_list = list()
+
+    for z_mean, z_log_var in zip(z_mean_list, z_log_var_list):
+        z = reparameterize(z_mean, z_log_var)
+        z_list.append(z)
+    
+    z_list = np.array(z_list)
+
+    #add a column of None before the first column
+    return z_list
 
 # Build Feedforward Neural Network with Regularization
 def build_classifier(input_dim, num_classes, _lambda=10e-4):
@@ -72,7 +82,7 @@ if __name__ == "__main__":
     y_train_categorical = to_categorical(y_train_encoded, num_classes)
 
     # Load test dataset
-    X_test, y_test = load_images_and_labels("../dataset/test")
+    X_test, y_test = load_images_and_labels(test_path)
     X_test_encoded = extract_features(encoder, X_test)
     y_test_encoded = label_encoder.transform(y_test)
     y_test_categorical = to_categorical(y_test_encoded, num_classes)
