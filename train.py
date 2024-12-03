@@ -8,11 +8,17 @@ import sys
 
 # Parameters
 input_size = (96, 96)
-batch_size = 32
+batch_size = 64
 num_classes = 5
-epochs = 40
+epochs = 30
+
+boosting = True
+
 train_dir = "dataset/train"
 test_dir = "dataset/test"
+
+if boosting:
+    train_dir = "dataset/train_boosted"
 
 # Data Augmentation and Preprocessing
 train_datagen = ImageDataGenerator(

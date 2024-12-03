@@ -4,7 +4,7 @@ def count_files(directory):
     return len([name for name in os.listdir(directory) if os.path.isfile(os.path.join(directory, name))])
 
 if __name__ == "__main__":
-    for type in ("train", "test"):
+    for type in ("train", "test", "train_boosted"):
         print(f"Folder {type}: ")
         total_files = sum(count_files(f'dataset/{type}/{i}') for i in range(5))
         for i in range(5):
