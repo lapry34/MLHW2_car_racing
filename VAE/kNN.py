@@ -40,10 +40,10 @@ if __name__ == "__main__":
     print("\nClassification Report on Test Data:\n")
     print(classification_report(y_test, y_pred))
     class_report = classification_report(y_test, y_pred, output_dict=True)
-    generate_classification_report(class_report, "../metrics_plot/", f"class_report_kNN_{str(latent_dim)}.png")
+    generate_classification_report(class_report, "metrics_plot/", f"class_report_kNN_{str(latent_dim)}.png")
 
     conf_matrix = confusion_matrix(y_test, y_pred)
     class_names = [str(i) for i in range(num_classes)]
-    generate_confusion_matrix(conf_matrix, class_names, "../metrics_plot", f"conf_matrix_kNN_{str(latent_dim)}.png")
+    generate_confusion_matrix(conf_matrix, class_names, "metrics_plot", f"conf_matrix_kNN_{str(latent_dim)}.png")
 
     sys.exit(0)

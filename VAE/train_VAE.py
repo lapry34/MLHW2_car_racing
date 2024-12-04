@@ -143,11 +143,11 @@ if __name__ == "__main__":
     dataset = load_dataset()
 
     # Check for existing models
-    if os.path.exists("./vae.keras") and os.path.exists("./encoder.keras") and os.path.exists("./decoder.keras"):
+    if os.path.exists("./vae_" + str(latent_dim) + ".keras") and os.path.exists("./encoder_" + str(latent_dim) + ".keras") and os.path.exists("./decoder_" + str(latent_dim) + ".keras"):
         print("Loading existing models...")
-        vae = tf.keras.models.load_model("./vae.keras", compile=False)
-        encoder = tf.keras.models.load_model("./encoder.keras", compile=False)
-        decoder = tf.keras.models.load_model("./decoder.keras", compile=False)
+        vae = tf.keras.models.load_model("./vae_" + str(latent_dim) + ".keras", compile=False)
+        encoder = tf.keras.models.load_model("./encoder_" + str(latent_dim) + ".keras", compile=False)
+        decoder = tf.keras.models.load_model("./decoder_" + str(latent_dim) + ".keras", compile=False)
     else:
         print("No existing models found. Initializing new models...")
         encoder = Encoder(latent_dim)

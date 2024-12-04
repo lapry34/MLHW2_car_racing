@@ -74,12 +74,12 @@ if __name__ == "__main__":
 
     # Confusion Matrix
     conf_matrix = confusion_matrix(y_test_encoded, y_pred)
-    generate_confusion_matrix(conf_matrix, class_names, "../metrics_plot/", f"conf_matrix_NN_{str(latent_dim)}.png")
+    generate_confusion_matrix(conf_matrix, class_names, "metrics_plot/", f"conf_matrix_NN_{str(latent_dim)}.png")
 
     # Classification Report
     class_report = classification_report(y_test_encoded, y_pred, target_names=class_names, output_dict=True)
     print("Classification Report:\n")
     print(classification_report(y_test_encoded, y_pred, target_names=class_names))
-    generate_classification_report(class_report, "../metrics_plot/", f"class_report_NN_{str(latent_dim)}.png")
+    generate_classification_report(class_report, "metrics_plot/", f"class_report_NN_{str(latent_dim)}.png")
 
     sys.exit(0)
