@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 # Parameters
 image_size = 96
-latent_dim = 8
+latent_dim = 4
 batch_size = 64
 
 # Data Loading
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     optimizer = tf.keras.optimizers.Adam()
 
     # Train the VAE
-    epochs = 20
+    epochs = 25
     train_vae(vae, dataset, optimizer, epochs)
 
     # Save models

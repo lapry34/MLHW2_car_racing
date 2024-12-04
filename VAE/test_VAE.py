@@ -10,7 +10,7 @@ from train_VAE import Encoder, Decoder, VAE, reparameterize
 
 # Parameters
 image_size = 96
-latent_dim = 32
+latent_dim = 8
 batch_size = 64
 
 test_path = "../dataset/test"
@@ -158,11 +158,11 @@ if __name__ == "__main__":
     # Check if we need to save the encoded variables
     if save_encoded:
         train_mean, train_var = save_encoded_variables(vae, train_dataset, train_path + "_VAE_" + str(latent_dim))
-        test_mean, test_var = save_encoded_variables(vae, test_dataset, test_path + "_VAE" + str(latent_dim))
+        test_mean, test_var = save_encoded_variables(vae, test_dataset, test_path + "_VAE_" + str(latent_dim))
 
         # Generate synthetic data
         num_samples = 1000
-        generate_data(train_mean, train_var, vae, path=train_path + "_VAE/synthetic")
+        generate_data(train_mean, train_var, vae, path=train_path + "_VAE_" + str(latent_dim) + "/synthetic")
 
     # Test the VAE
     try:

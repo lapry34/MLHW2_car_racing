@@ -1,1 +1,4 @@
-dataset/train_VAE/synthetic
+dataset/train_VAE_4/synthetic
+dataset/train_VAE_8/synthetic
+dataset/train_VAE_16/synthetic
+dataset/train_VAE_32/synthetic
