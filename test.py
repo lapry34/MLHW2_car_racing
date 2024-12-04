@@ -13,7 +13,7 @@ if __name__ == "__main__":
     batch_size = 32
     test_dir = "dataset/test"
     model_path = "cnn_model.keras"
-    output_dir = "metrics_images"
+    output_dir = "metrics_plot"
 
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # Confusion Matrix
     conf_matrix = confusion_matrix(true_labels, predicted_labels)
-    generate_confusion_matrix(conf_matrix, class_names, output_dir)
+    generate_confusion_matrix(conf_matrix, class_names, output_dir, "conf_matrix_CNN.png")
 
     # Classification Report
     class_report = classification_report(
@@ -50,5 +50,5 @@ if __name__ == "__main__":
     )
     print("Classification Report:\n")
     print(classification_report(true_labels, predicted_labels, target_names=class_names))
-    generate_classification_report(class_report, output_dir)
+    generate_classification_report(class_report, output_dir, "class_report_CNN.png")
     sys.exit(0)

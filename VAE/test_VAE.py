@@ -10,7 +10,7 @@ from train_VAE import Encoder, Decoder, VAE, reparameterize
 
 # Parameters
 image_size = 96
-latent_dim = 8
+latent_dim = 32
 batch_size = 64
 
 test_path = "../dataset/test"
@@ -154,6 +154,13 @@ if __name__ == "__main__":
     # Load datasets
     train_dataset = load_dataset(path=train_path)
     test_dataset = load_dataset(path=test_path)
+
+    # print the model summary
+    print(vae.summary())
+
+    # print the encoder and decoder summary
+    print(vae.encoder.summary())
+    print(vae.decoder.summary())
 
     # Check if we need to save the encoded variables
     if save_encoded:

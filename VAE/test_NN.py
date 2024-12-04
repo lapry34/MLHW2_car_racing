@@ -12,9 +12,8 @@ from train_VAE import Encoder, reparameterize
 
 # Parameters
 image_size = 96
-latent_dim = 8
+latent_dim = 32
 num_classes = 5  # Number of classes in the dataset
-output_dir = "metrics_images"
 
 # Data Loading
 def load_images_and_labels(base_path, folders=[0, 1, 2, 3, 4]):
@@ -75,12 +74,12 @@ if __name__ == "__main__":
 
     # Confusion Matrix
     conf_matrix = confusion_matrix(y_test_encoded, y_pred)
-    generate_confusion_matrix(conf_matrix, class_names, output_dir)
+    generate_confusion_matrix(conf_matrix, class_names, "../metrics_plot/", f"conf_matrix_NN_{str(latent_dim)}.png")
 
     # Classification Report
     class_report = classification_report(y_test_encoded, y_pred, target_names=class_names, output_dict=True)
     print("Classification Report:\n")
     print(classification_report(y_test_encoded, y_pred, target_names=class_names))
-    generate_classification_report(class_report, output_dir)
+    generate_classification_report(class_report, "../metrics_plot/", f"class_report_NN_{str(latent_dim)}.png")
 
     sys.exit(0)

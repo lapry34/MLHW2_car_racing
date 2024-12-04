@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report
 import os 
 
-def generate_classification_report(class_report, output_dir):
+def generate_classification_report(class_report, output_dir, filename):
 
     class_names = list(class_report.keys())[:-3]
 
@@ -40,13 +40,13 @@ def generate_classification_report(class_report, output_dir):
     table.auto_set_column_width(col=list(range(len(header))))
 
     # Save the classification report as a PNG image
-    class_report_path = os.path.join(output_dir, "classification_report.png")
+    class_report_path = os.path.join(output_dir, filename)
     plt.tight_layout()
     plt.savefig(class_report_path)
     print(f"Classification Report saved at: {class_report_path}")
     plt.close()
 
-def generate_confusion_matrix(conf_matrix, class_names, output_dir):
+def generate_confusion_matrix(conf_matrix, class_names, output_dir, filename):
     
     # Plot and Save Confusion Matrix
     disp = ConfusionMatrixDisplay(confusion_matrix=conf_matrix, display_labels=class_names)
@@ -55,7 +55,7 @@ def generate_confusion_matrix(conf_matrix, class_names, output_dir):
     plt.tight_layout()
     
     # Save the confusion matrix as a PNG image
-    conf_matrix_path = os.path.join(output_dir, "confusion_matrix.png")
+    conf_matrix_path = os.path.join(output_dir, filename)
     plt.savefig(conf_matrix_path)
     print(f"Confusion Matrix saved at: {conf_matrix_path}")
     plt.close()

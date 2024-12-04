@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 
 if __name__ == "__main__":
-    latent_dim = 8   # Replace with the desired latent dimension L
+    latent_dim = 4   # Replace with the desired latent dimension L
     num_classes = 5  # Number of classes in the dataset
 
     train_path = f"../dataset/train_VAE_{latent_dim}/encoded_latents.csv"

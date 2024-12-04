@@ -11,7 +11,7 @@ from train_VAE import Encoder, reparameterize
 boosting = False
 # Parameters
 image_size = 96
-latent_dim = 4
+latent_dim = 32
 batch_size = 64
 num_classes = 5  # Number of classes in the dataset
 
