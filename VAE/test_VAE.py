@@ -149,7 +149,7 @@ def test_vae(model, dataset, num_images_per_class=1):
 
 if __name__ == "__main__":
     # Load the trained VAE model
-    vae = tf.keras.models.load_model("./vae.keras", compile=False)
+    vae = tf.keras.models.load_model("./vae_" + str(latent_dim) + ".keras", compile=False)
 
     # Load datasets
     train_dataset = load_dataset(path=train_path)
@@ -157,8 +157,8 @@ if __name__ == "__main__":
 
     # Check if we need to save the encoded variables
     if save_encoded:
-        train_mean, train_var = save_encoded_variables(vae, train_dataset, train_path + "_VAE")
-        test_mean, test_var = save_encoded_variables(vae, test_dataset, test_path + "_VAE")
+        train_mean, train_var = save_encoded_variables(vae, train_dataset, train_path + "_VAE_" + str(latent_dim))
+        test_mean, test_var = save_encoded_variables(vae, test_dataset, test_path + "_VAE" + str(latent_dim))
 
         # Generate synthetic data
         num_samples = 1000

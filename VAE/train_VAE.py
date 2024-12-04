@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 # Parameters
 image_size = 96
-latent_dim = 32
+latent_dim = 8
 batch_size = 64
 
 # Data Loading
@@ -162,8 +162,8 @@ if __name__ == "__main__":
     train_vae(vae, dataset, optimizer, epochs)
 
     # Save models
-    encoder.save("./encoder.keras")
-    decoder.save("./decoder.keras")
-    vae.save("./vae.keras")
+    encoder.save("./encoder_" + str(latent_dim) + ".keras")
+    decoder.save("./decoder_" + str(latent_dim) + ".keras")
+    vae.save("./vae_" + str(latent_dim) + ".keras")
 
     sys.exit(0)

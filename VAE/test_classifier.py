@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from sklearn.metrics import classification_report, confusion_matrix
 from metrics_plotter import generate_classification_report, generate_confusion_matrix
 import matplotlib.pyplot as plt
-from train_VAE import Encoder
+from train_VAE import Encoder, reparameterize
 
 # Parameters
 image_size = 96
@@ -32,8 +32,18 @@ def load_images_and_labels(base_path, folders=[0, 1, 2, 3, 4]):
 
 # Feature Extraction with Encoder
 def extract_features(encoder, images):
-    z_mean, _ = encoder(images)  # Use the encoder to extract latent features
-    return z_mean.numpy()
+    z_mean_list, z_log_var_list = encoder(images)  # Use the encoder to extract latent features
+    z_list = list()
+
+    for z_mean, z_log_var in zip(z_mean_list, z_log_var_list):
+        z = reparameterize(z_mean, z_log_var)
+        z_list.append(z)
+    
+    z_list = np.array(z_list)
+
+    #add a column of None before the first column
+    return z_list
+    #return z_mean_list.numpy()
 
 # Main Execution
 if __name__ == "__main__":

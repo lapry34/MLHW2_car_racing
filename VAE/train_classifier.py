@@ -48,6 +48,7 @@ def extract_features(encoder, images):
 
     #add a column of None before the first column
     return z_list
+    #return z_mean_list.numpy()
 
 # Build Feedforward Neural Network with Regularization
 def build_classifier(input_dim, num_classes, _lambda=10e-4):
@@ -66,9 +67,9 @@ def build_classifier(input_dim, num_classes, _lambda=10e-4):
 # Main Execution
 if __name__ == "__main__":
     # Load encoder
-    if not os.path.exists("./encoder.keras"):
+    if not os.path.exists("./encoder_" + str(latent_dim) + ".keras"):
         raise FileNotFoundError("Encoder model not found. Please train and save the encoder first.")
-    encoder = tf.keras.models.load_model("./encoder.keras", compile=False)
+    encoder = tf.keras.models.load_model("./encoder_" + str(latent_dim) + ".keras", compile=False)
 
     # Load training dataset
     X_train, y_train = load_images_and_labels(train_path)
@@ -92,7 +93,7 @@ if __name__ == "__main__":
     classifier.fit(X_train_encoded, y_train_categorical, epochs=250, batch_size=20, validation_data=(X_test_encoded, y_test_categorical))
 
     # Save the classifier
-    classifier.save("./classifier.keras")
+    classifier.save("./classifier_" + str(latent_dim) + ".keras")
 
     print("Classifier trained and saved successfully.")
 
