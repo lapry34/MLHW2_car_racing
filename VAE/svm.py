@@ -66,6 +66,6 @@ if __name__ == "__main__":
 
     conf_matrix = confusion_matrix(y_test, y_pred)
     class_names = [str(i) for i in range(num_classes)]
-    generate_confusion_matrix(conf_matrix, class_names, "metrics_plot", f"conf_matrix_SVM_{str(latent_dim)}.png")
+    generate_confusion_matrix(conf_matrix, class_names, "metrics_plot/", f"conf_matrix_SVM_{str(latent_dim)}.png")
 
     sys.exit(0)
