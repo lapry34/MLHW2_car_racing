@@ -10,7 +10,7 @@ from train_VAE import Encoder, Decoder, VAE, reparameterize
 
 # Parameters
 image_size = 96
-latent_dim = 32
+latent_dim = 8
 batch_size = 64
 
 test_path = "../dataset/test"
