@@ -21,7 +21,6 @@ if __name__ == "__main__":
     epochs = 15
 
     boosting = False
-    focal = True
 
     train_dir = "dataset/train"
     test_dir = "dataset/test"
@@ -96,8 +95,6 @@ if __name__ == "__main__":
         model.save("cnn_model_boosting.keras")
     else:
         model.save("cnn_model.keras")
-    if focal:
-        model.save("cnn_model_focal.keras")
 
     # Plot and save Loss and Accuracy
     plt.figure()

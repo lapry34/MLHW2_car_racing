@@ -3,12 +3,13 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
 import pandas as pd
+import joblib
 import sys
 sys.path.append("../")
 from metrics_plotter import generate_classification_report, generate_confusion_matrix
 
 if __name__ == "__main__":
-    latent_dim = 32   # Replace with the desired latent dimension L
+    latent_dim = 4   # Replace with the desired latent dimension L
     num_classes = 5  # Number of classes in the dataset
 
     train_path = f"../dataset/train_AE_{latent_dim}/encoded_latents.csv"
@@ -67,5 +68,9 @@ if __name__ == "__main__":
     conf_matrix = confusion_matrix(y_test, y_pred)
     class_names = [str(i) for i in range(num_classes)]
     generate_confusion_matrix(conf_matrix, class_names, "metrics_plot/", f"conf_matrix_SVM_{str(latent_dim)}.png")
+
+    #save the model
+    model_path = f"svm_AE_{str(latent_dim)}.joblib"
+    joblib.dump(best_svm, model_path)
 
     sys.exit(0)

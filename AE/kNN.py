@@ -1,3 +1,4 @@
+import joblib
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.neighbors import KNeighborsClassifier
@@ -10,7 +11,7 @@ sys.path.append("../")
 from metrics_plotter import generate_classification_report, generate_confusion_matrix
 
 if __name__ == "__main__":
-    latent_dim = 8   # Replace with the desired latent dimension L
+    latent_dim = 4   # Replace with the desired latent dimension L
     num_classes = 5  # Number of classes in the dataset
 
     train_path = f"../dataset/train_AE_{latent_dim}/encoded_latents.csv"
@@ -47,5 +48,8 @@ if __name__ == "__main__":
     conf_matrix = confusion_matrix(y_test, y_pred)
     class_names = [str(i) for i in range(num_classes)]
     generate_confusion_matrix(conf_matrix, class_names, "metrics_plot", f"conf_matrix_kNN_{str(latent_dim)}.png")
+
+    model_path = f"kNN_AE_{latent_dim}.joblib"
+    joblib.dump(best_knn, model_path)
 
     sys.exit(0)
