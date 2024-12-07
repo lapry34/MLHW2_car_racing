@@ -17,6 +17,17 @@ def unify_shade_near_target(image, target_shade=(99, 202, 100), target_green=(0,
     img_array[mask] = target_green
     return Image.fromarray(img_array)
 
+def convert_IMG_numpy(img_array, target_shade=(99, 202, 100), target_green=(0, 255, 0), tolerance=50):
+    r, g, b = img_array[..., 0], img_array[..., 1], img_array[..., 2]
+    target_r, target_g, target_b = target_shade
+    mask = (
+        (abs(r - target_r) <= tolerance) &
+        (abs(g - target_g) <= tolerance) &
+        (abs(b - target_b) <= tolerance)
+    )
+    img_array[mask] = target_green
+    return img_array
+
 def process_images_in_directory(input_path, output_path, target_shade, target_green, tolerance):
     if not os.path.exists(input_path):
         if verbose:
