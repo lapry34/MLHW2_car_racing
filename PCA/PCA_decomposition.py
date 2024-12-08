@@ -5,6 +5,7 @@ from sklearn.decomposition import PCA
 import sys
 sys.path.append("../")
 from metrics_plotter import generate_classification_report, generate_confusion_matrix
+import matplotlib.pyplot as plt
 import os
 import numpy as np
 
@@ -38,14 +39,34 @@ if __name__ == "__main__":
     scaler = StandardScaler()
     images_normalized = scaler.fit_transform(images)
 
-
     # Apply PCA
-    pca = PCA(n_components=4)  # Set the number of principal components
+    pca = PCA(n_components=32)  # Set the number of principal components
     principal_components = pca.fit_transform(images_normalized)
+
+    # Plot the PCA
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    colors = ['r', 'g', 'b', 'y', 'c']
+    for i in range(num_classes):
+        indices = np.where(labels == i)
+        ax.scatter(principal_components[indices, 0], principal_components[indices, 1], principal_components[indices, 2], c=colors[i], label=str(i))
+    ax.set_xlabel('Principal Component 1')
+    ax.set_ylabel('Principal Component 2')
+    ax.set_zlabel('Principal Component 3')
+    ax.legend()
+    plt.savefig("PCA_plot.png")
 
     # Print the explained variance ratio
     sum_variances = pca.explained_variance_ratio_.sum()
     print("Explained Variances:", sum_variances)
+
+    #plot the explained variance ratio vs number of components
+    fig, ax = plt.subplots()
+    ax.plot(np.cumsum(pca.explained_variance_ratio_))
+    ax.set_xlabel('Number of Principal Components')
+    ax.set_ylabel('Explained Variance Ratio')
+    ax.set_title('Explained Variance Ratio vs Number of Principal Components')
+    plt.savefig("PCA_explained_variance_ratio.png")
 
     # do SVM
     from sklearn.svm import SVC
