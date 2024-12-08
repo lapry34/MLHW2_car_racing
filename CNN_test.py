@@ -26,6 +26,8 @@ if __name__ == "__main__":
     # Load the model
     model = tf.keras.models.load_model(model_path)
 
+    print(model.summary())
+
     # Prepare the test data generator
     test_datagen = ImageDataGenerator(rescale=1.0 / 255)
     test_generator = test_datagen.flow_from_directory(
